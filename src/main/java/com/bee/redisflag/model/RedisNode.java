@@ -1,5 +1,7 @@
 package com.bee.redisflag.model;
 
+import com.bee.redisflag.core.SpringContext;
+
 import redis.clients.jedis.Jedis;
 
 public class RedisNode {
@@ -48,7 +50,8 @@ public class RedisNode {
 
 	public Jedis getJedis() {
 		if (jedis == null) {
-			jedis = new Jedis(host, port);
+			Integer timeout = SpringContext.getEnvironment().getProperty("redis.timeout", Integer.class, 10000);
+			jedis = new Jedis(host, port, timeout);
 			jedis.getClient().setDb(0);
 		}
 		return jedis;
