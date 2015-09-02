@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>RedisMonitor | $!{Nav_Current_Node.name}</title>
+<meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport' />
+<link href="/misc/AdminLTE-2.3.0/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="/misc/font-awesome-4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link href="/misc/ionicons.min.css" rel="stylesheet" type="text/css" />
+<link href="/misc/AdminLTE-2.3.0/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
+<link href="/misc/AdminLTE-2.3.0/dist/css/skins/skin-purple.min.css" rel="stylesheet" type="text/css" />
+<!--[if lt IE 9]>
+<script src="/misc/html5shiv.min.js"></script>
+<script src="/misc/respond.min.js"></script>
+<![endif]-->
+<link rel="stylesheet" href="/misc/base.css" />
+#foreach($item in $_page_heads.split("#"))${item}#end
+</head>
+<body class="skin-purple sidebar-mini fixed">
+<div class="wrapper">
+	<header class="main-header">
+		<!-- Logo -->
+		<a href="/" class="logo"><span class="logo-mini"><img src="/logo.png" height="30px"/></span> <span class="logo-lg"><img src="/logo.png" height="30px"/> RedisFlag</span></a>
+		<!-- Header Navbar -->
+		<nav class="navbar navbar-static-top" role="navigation">
+			<!-- Sidebar toggle button-->
+			##<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button"> <span class="sr-only">Toggle navigation</span></a>
+			<!-- Navbar Right Menu -->
+			<div class="navbar-custom-menu">
+				<ul class="nav navbar-nav">
+					<li><a href="#" data-toggle="control-sidebar" id="control-sidebar-btn"><i class="fa fa-bolt"></i></a></li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+
+	<aside class="main-sidebar">
+		<section class="sidebar">
+			<!-- Sidebar Menu -->
+			<ul class="sidebar-menu">
+				<li class="header">Welcome !</li>
+				#foreach($item in ${NAV_TOP_NODES})
+				<li class="#if(${item.hasTopNavChild()})treeview#end #if(${Nav_Node_Link[0].id}==${item.id})active#end">
+					<a href="${item.path}"><i class='fa fa-${item.icon}'></i> <span>${item.name}</span>#if(${item.hasTopNavChild()}) <i class="fa fa-angle-left pull-right"></i>#end</a>
+					#if(${item.hasTopNavChild()})
+					<ul class="treeview-menu">
+    					#foreach($child in ${item.topNavChildren})
+    					<li #if(${Nav_Node_Link.size()} > 1 && $!{Nav_Node_Link[1].id} == ${child.id})class="active"#end><a href="${child.path}"><i class="fa fa-${child.icon}"></i> ${child.name}</a></li>
+    					#end
+					</ul>
+					#end
+				</li>
+				#end
+			</ul>
+		</section>
+	</aside>
+
+	<!-- content-wrapper -->
+	<div class="content-wrapper">
+		<!-- Content Header (Page header) -->
+		<section class="content-header">
+			<h1><i class='fa fa-$!{Nav_Current_Node.icon}'></i> $!{Nav_Current_Node.name} <small>$!{Nav_Current_Node.description}</small></h1>
+			<ol class="breadcrumb"><li><a href="/"><i class="fa fa-home"></i> 首页</a></li>#foreach($item in $Nav_Node_Link)#if($velocityCount < ${Nav_Node_Link.size()})<li><a href="$!{item.path}">$!{item.name}</a></li>#else<li class="active">$!{Nav_Current_Node.name}</li>#end#end</ol>
+		</section>
+		<!-- Main content -->
+		<section class="content">
+			$!{screen_content}
+		</section>
+		<!-- /.content -->
+	</div>
+	<!-- /.content-wrapper -->
+
+	<!-- Main Footer -->
+	<footer class="main-footer">
+		<!-- To the right -->
+		<div class="pull-right hidden-xs">RedisFlag</div>
+		<!-- Default to the left -->
+		<strong>Copyright &copy; 2015 <a href="#">hello.vivi@qq.com</a>.</strong> All rights reserved.
+	</footer>
+    <aside class="control-sidebar control-sidebar-dark">
+		<div id="event_container" style="padding:20px 3px 0px 3px"><center>暂无事件</center></div>
+	</aside>
+	<!-- Add the sidebar's background. This div must be placed immediately after the control sidebar -->
+	<div class='control-sidebar-bg'></div>
+</div>
+<!-- ./wrapper -->
+
+<script src="/misc/AdminLTE-2.3.0/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<script src="/misc/AdminLTE-2.3.0/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script>
+var AdminLTEOptions = {
+	contro	lSidebarOptions:{
+		slide:false
+	}
+};
+</script>
+<script src="/misc/AdminLTE-2.3.0/dist/js/app.min.js" type="text/javascript"></script>
+<script src="/misc/AdminLTE-2.3.0/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="/misc/bootbox.min.js"></script>
+<script src="/misc/date_formater.js"></script>
+<script src="/misc/base.js"></script>
+#foreach($item in $_body_append.split("#"))${item}#end
+</body>
+</html>

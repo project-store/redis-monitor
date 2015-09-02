@@ -1,0 +1,69 @@
+<div class="row">
+	<div class="col-xs-12"><h4><i class="fa fa-hand-o-right"></i> ${node}</h4></div>
+</div>
+<div class="box">
+	<div class="box-header">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="/monitor/${node}"><i class="fa fa-area-chart text-green"></i> 监控</a></li>
+			<li><a href="/config/${node}"><i class="fa fa-cogs text-blue"></i> 配置</a></li>
+			<li><a href="/slowlog/${node}"><i class="fa fa-file-text text-red"></i> SlowLog</a></li>
+		</ul>
+    </div>
+	<div class="box-body">
+		<div class="row">
+        	<div class="col-xs-3">
+        		<div class="small-box bg-aqua">
+          	  		<div class="inner">
+               	   		<h3><span id="dbsize">--</span></h3>
+              			<p>Key数量 <span id="dbsize_expired"><span></p>
+            		</div>
+                	<div class="icon">
+                		<i class="fa fa-pie-chart"></i>
+                	</div>
+				</div>
+        	</div>
+        	<div class="col-xs-3">
+        		<div class="small-box bg-green">
+          	  		<div class="inner">
+               	   		<h3><span id="used_memory_human">--</span></h3>
+              			<p>内存使用量</p>
+            		</div>
+                	<div class="icon">
+                		<i class="fa fa-bar-chart"></i>
+                	</div>
+				</div>
+        	</div>
+        	<div class="col-xs-3">
+        		<div class="small-box bg-red">
+          	  		<div class="inner">
+               	   		<h3><span id="hit_rate"></span><sup style="font-size: 20px">%</sup></h3>
+              			<p>命中率</p>
+            		</div>
+                	<div class="icon">
+                		<i class="fa fa-line-chart"></i>
+                	</div>
+				</div>
+        	</div>
+        	<div class="col-xs-3">
+        		<div class="small-box bg-orange">
+          	  		<div class="inner">
+               	   		<h3><span id="blocked_clients">--</span></h3>
+              			<p>阻塞Clients</p>
+            		</div>
+                	<div class="icon">
+                		<i class="fa fa-exclamation-triangle"></i>
+                	</div>
+				</div>
+        	</div>
+    	</div>
+		<div class="row">
+        	<div id="charts_tps" class="col-xs-6" style="min-width:300px;height:300px"></div>
+        	<div id="charts_clients" class="col-xs-6" style="min-width:300px;height:300px"></div>
+    	</div>
+	</div>
+</div>
+<script>var node="$!{node}"</script>
+#bodyAppend("
+<script src='/misc/Highcharts-4.1.8/js/highcharts.js'></script>
+<script src='/misc/app/monitor.js'></script>
+")

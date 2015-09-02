@@ -1,0 +1,16 @@
+##布局
+#macro(layout $key)
+#set($layout="layout/${key}.vm")
+#end
+
+#macro(title $val)#set($pagetitle = $val)#end
+#macro(keywords $val)#set($pageKeywords = $val)#end
+#macro(description $val)#set($pageDescription = $val)#end
+#macro(addHead $head)
+#if($_page_heads)#set($_page_heads=$_page_heads+"#"+$head)
+#else#set($_page_heads=$head)#end
+#end
+#macro(bodyAppend $append)
+#if($_body_append)#set($_body_append=$_body_append+"#"+$append)
+#else#set($_body_append=$append)#end
+#end

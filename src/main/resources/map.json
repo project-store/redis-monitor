@@ -1,0 +1,7 @@
+[
+	{"name":"实例","path":"/clusters","icon":"database",type:"1","children":[
+		{"name":"监控","path":"/monitor/.*","icon":"area-chart",type:"2"},
+		{"name":"配置","path":"/config/.*","icon":"cogs",type:"2"},
+		{"name":"SlowLog","path":"/slowlog/.*","icon":"file-text",type:"2"}
+	]}
+]

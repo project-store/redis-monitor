@@ -1,0 +1,11 @@
+body,.h1,.h2,.h3,.h4,.h5,.h6,h1,h2,h3,h4,h5,h6 {
+	font-family: "Microsoft YaHei"
+}
+
+.skin-1 .navbar {
+	background-color: #2E4E73
+}
+
+.bootbox-close-button {
+	font-size: 25px !important;
+}
