@@ -1,6 +1,7 @@
 package com.bee.redisflag.controller;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,7 +45,7 @@ public class MonitorController {
 
 	@ResponseBody
 	@RequestMapping("/monitor/{node:.*}")
-	public Object monitorData(@PathVariable("node") String node) throws Exception {
+	public Object monitorData(@PathVariable("node") String node) throws IOException {
 		RedisNode redisNode = RedisClusterHolder.getNodeMapping().get(node);
 		String redis_info = redisNode.getJedis().info();
 		Properties redis_info_properties = PropertiesLoaderUtils.loadProperties(new InputStreamResource(new ByteArrayInputStream(redis_info.getBytes())));
