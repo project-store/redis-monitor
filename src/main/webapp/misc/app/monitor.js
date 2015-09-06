@@ -4,13 +4,8 @@ $(function() {
 			useUTC : false
 		}
 	});
-	// chartCPU();
-	// chartsClients();
-	// chartsTPS();
-
 	var charts_tps = drawChartsTPS();
 	var charts_clients = drawChartsClients();
-	// var charts_cpu = drawChartsCPU();
 
 	setInterval(function() {
 		$.get("/monitor/" + node, function(data) {
@@ -30,40 +25,6 @@ $(function() {
 	}, 1500);
 });
 
-function drawChartsCPU() {
-	return new Highcharts.Chart({
-		chart : {
-			renderTo : 'charts_cpu',
-			plotBackgroundColor : null,
-			plotBorderWidth : null,
-			plotShadow : false
-		},
-		title : {
-			text : 'CPU'
-		},
-		tooltip : {
-			pointFormat : '{series.name}: <b>{point.percentage:.1f}%</b>'
-		},
-		plotOptions : {
-			pie : {
-				allowPointSelect : true,
-				cursor : 'pointer',
-				dataLabels : {
-					enabled : false
-				},
-				showOutLegend : false
-			}
-		},
-		credits : {
-			enabled : false
-		},
-		series : [ {
-			type : 'pie',
-			name : '百分比',
-			data : [ [ '空闲', 45.0 ], [ '使用', 0.7 ] ]
-		} ]
-	});
-}
 function drawChartsClients() {
 	return new Highcharts.Chart({
 		chart : {
