@@ -25,7 +25,7 @@ $(function() {
 			$("#used_memory_human").text(data.used_memory_human);
 			$("#blocked_clients").text(data.blocked_clients);
 			var hit_rate = data.keyspace_hits / (parseInt(data.keyspace_hits) + parseInt(data.keyspace_misses));
-			$("#hit_rate").text((hit_rate * 100).toFixed(3));
+			$("#hit_rate").text((hit_rate * 100).toFixed(1));
 		});
 	}, 1500);
 });
