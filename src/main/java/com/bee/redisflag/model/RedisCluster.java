@@ -5,6 +5,7 @@ import java.util.List;
 public class RedisCluster {
 	private String name;
 	private List<RedisNode> nodes;
+	private List<RedisCluster> children;
 
 	public RedisCluster() {
 	}
@@ -27,6 +28,14 @@ public class RedisCluster {
 
 	public void setNodes(List<RedisNode> nodes) {
 		this.nodes = nodes;
+	}
+
+	public List<RedisCluster> getChildren() {
+		return children;
+	}
+
+	public void setChildren(List<RedisCluster> children) {
+		this.children = children;
 	}
 
 }

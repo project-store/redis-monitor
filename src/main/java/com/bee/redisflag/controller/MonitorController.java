@@ -31,7 +31,7 @@ public class MonitorController {
 	public ModelAndView clusters() {
 		Map<String, Object> data = new HashMap<>();
 		data.put("clusters", RedisClusterHolder.getRedisClusters());
-		return new ModelAndView("clusters").addAllObjects(data);
+			return new ModelAndView("clusters").addAllObjects(data);
 	}
 
 	@RequestMapping(value = "/monitor/{node:.*}", produces = { "text/html" })
@@ -39,7 +39,7 @@ public class MonitorController {
 		Map<String, Object> data = new HashMap<>();
 		RedisNode redisNode = RedisClusterHolder.getNodeMapping().get(node);
 		data.put("node", node);
-		data.put("info", redisNode.getJedis().info());
+		data.put("info", redisNode.connect().info());
 		return new ModelAndView("monitor").addAllObjects(data);
 	}
 
@@ -47,9 +47,9 @@ public class MonitorController {
 	@RequestMapping("/monitor/{node:.*}")
 	public Object monitorData(@PathVariable("node") String node) throws IOException {
 		RedisNode redisNode = RedisClusterHolder.getNodeMapping().get(node);
-		String redis_info = redisNode.getJedis().info();
+		String redis_info = redisNode.connect().info();
 		Properties redis_info_properties = PropertiesLoaderUtils.loadProperties(new InputStreamResource(new ByteArrayInputStream(redis_info.getBytes())));
-		redis_info_properties.put("dbSize", redisNode.getJedis().dbSize());
+		redis_info_properties.put("dbSize", redisNode.connect().dbSize());
 		return redis_info_properties;
 	}
 
@@ -58,7 +58,7 @@ public class MonitorController {
 		Map<String, Object> data = new HashMap<>();
 		RedisNode redisNode = RedisClusterHolder.getNodeMapping().get(node);
 		data.put("node", node);
-		List<String> configStrList = redisNode.getJedis().configGet("*");
+		List<String> configStrList = redisNode.connect().configGet("*");
 		Map<String, Object> configs = new HashMap<>();
 		for (int i = 0; i < configStrList.size(); i += 2) {
 			configs.put(configStrList.get(i), configStrList.get(i + 1));
@@ -72,7 +72,7 @@ public class MonitorController {
 		Map<String, Object> data = new HashMap<>();
 		RedisNode redisNode = RedisClusterHolder.getNodeMapping().get(node);
 		data.put("node", node);
-		data.put("slowLogs", redisNode.getJedis().slowlogGet());
+		data.put("slowLogs", redisNode.connect().slowlogGet());
 		return new ModelAndView("slowlog").addAllObjects(data);
 	}
 

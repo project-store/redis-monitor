@@ -1,4 +1,4 @@
-body,.h1,.h2,.h3,.h4,.h5,.h6,h1,h2,h3,h4,h5,h6 {
+body, .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
 	font-family: "Microsoft YaHei"
 }
 
@@ -8,4 +8,20 @@ body,.h1,.h2,.h3,.h4,.h5,.h6,h1,h2,h3,h4,h5,h6 {
 
 .bootbox-close-button {
 	font-size: 25px !important;
+}
+
+.callout.callout-normal a {
+	color: #444
+}
+
+.callout.callout-normal a.btn {
+	text-decoration: none;
+}
+
+.callout.callout-normal {
+	border-color: #D2D6DE;
+	background-color: #fff !important;
+	border-right: 1px solid #D2D6DE;
+	border-top: 1px solid #D2D6DE;
+	border-bottom: 1px solid #D2D6DE;
 }

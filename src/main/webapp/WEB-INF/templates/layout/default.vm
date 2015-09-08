@@ -89,13 +89,14 @@
 <script src="/misc/AdminLTE-2.3.0/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 <script>
 var AdminLTEOptions = {
-	contro	lSidebarOptions:{
+	controlSidebarOptions:{
 		slide:false
 	}
 };
 </script>
 <script src="/misc/AdminLTE-2.3.0/dist/js/app.min.js" type="text/javascript"></script>
 <script src="/misc/AdminLTE-2.3.0/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="/misc/AdminLTE-2.3.0/plugins/fastclick/fastclick.min.js" type="text/javascript"></script>
 <script src="/misc/bootbox.min.js"></script>
 <script src="/misc/date_formater.js"></script>
 <script src="/misc/base.js"></script>

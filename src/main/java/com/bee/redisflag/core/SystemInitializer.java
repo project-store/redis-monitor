@@ -5,16 +5,13 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.context.ApplicationContext;
 
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.bee.redisflag.data.RedisClusterHolder;
 import com.bee.redisflag.model.RedisCluster;
 import com.bee.redisflag.model.RedisNode;
@@ -64,22 +61,16 @@ public class SystemInitializer {
 			data = br.readLine();
 		}
 		br.close();
-		List<RedisCluster> redisClusters = new ArrayList<>();
-		JSONArray redisClusterArray = JSONArray.parseArray(json.toString());
-		for (int i = 0; i < redisClusterArray.size(); i++) {
-			JSONObject redisClusterJsonObj = redisClusterArray.getJSONObject(i);
-			RedisCluster redisCluster = new RedisCluster(redisClusterJsonObj.getString("name"));
-			List<RedisNode> nodes = new ArrayList<>();
-			JSONArray nodesJsonArray = redisClusterJsonObj.getJSONArray("nodes");
-			for (Object obj : nodesJsonArray) {
-				String[] ip_port = StringUtils.split(obj.toString(), ":");
-				RedisNode node = new RedisNode(ip_port[0], Integer.valueOf(ip_port[1]));
-				nodes.add(node);
+		RedisClusterHolder.init(JSONArray.parseArray(json.toString(), RedisCluster.class));
+		logger.info("开始创建Redis连接...");
+		Collection<RedisNode> values = RedisClusterHolder.getNodeMapping().values();
+		for (RedisNode redisNode : values) {
+			try {
+				redisNode.connect();
+				logger.info(redisNode + "连接已创建");
+			} catch (Exception e) {
+				logger.warn(redisNode + "连接创建失败!", e);
 			}
-			redisCluster.setNodes(nodes);
-			redisClusters.add(redisCluster);
-			RedisClusterHolder.init(redisClusters);
-
 		}
 	}
 }

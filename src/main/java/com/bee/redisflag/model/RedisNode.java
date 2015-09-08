@@ -1,5 +1,12 @@
 package com.bee.redisflag.model;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.util.Properties;
+
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.support.PropertiesLoaderUtils;
+
 import com.bee.redisflag.core.SpringContext;
 
 import redis.clients.jedis.Jedis;
@@ -48,13 +55,28 @@ public class RedisNode {
 		this.port = port;
 	}
 
-	public Jedis getJedis() {
+	public Jedis connect() {
 		if (jedis == null) {
 			Integer timeout = SpringContext.getEnvironment().getProperty("redis.timeout", Integer.class, 10000);
 			jedis = new Jedis(host, port, timeout);
 			jedis.getClient().setDb(0);
 		}
 		return jedis;
+	}
+
+	public String role() {
+		try {
+			Properties redis_replication_properties = PropertiesLoaderUtils.loadProperties(new InputStreamResource(new ByteArrayInputStream(connect().info("Replication").getBytes())));
+			return redis_replication_properties.getProperty("role");
+		} catch (IOException e) {
+			e.printStackTrace();
+			return "unknown";
+		}
+	}
+
+	@Override
+	public String toString() {
+		return host + ":" + port;
 	}
 
 }
