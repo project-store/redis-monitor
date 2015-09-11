@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>RedisMonitor | Error</title>
+<meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport' />
+<link href="/misc/AdminLTE-2.3.0/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="/misc/font-awesome-4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link href="/misc/ionicons.min.css" rel="stylesheet" type="text/css" />
+<link href="/misc/AdminLTE-2.3.0/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
+<link href="/misc/AdminLTE-2.3.0/dist/css/skins/skin-purple.min.css" rel="stylesheet" type="text/css" />
+<!--[if lt IE 9]>
+<script src="/misc/html5shiv.min.js"></script>
+<script src="/misc/respond.min.js"></script>
+<![endif]-->
+<link rel="stylesheet" href="/misc/base.css" />
+#foreach($item in $_page_heads.split("#"))${item}#end
+</head>
+<body>
+<div class="row">
+	<div class="col-xs-12">
+		$!{screen_content}
+	</div>
+</div>
+
+#foreach($item in $_body_append.split("#"))${item}#end
+</body>
+</html>
