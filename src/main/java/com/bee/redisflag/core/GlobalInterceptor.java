@@ -19,6 +19,7 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter {
 
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+
 		String requestURI = request.getRequestURI();
 		UriComponents uriComponents = UriComponentsBuilder.fromUriString(requestURI).build();
 		List<String> pathSegments = uriComponents.getPathSegments();

@@ -30,7 +30,7 @@ public class SystemDestroyer {
 		for (String key : RedisClusterHolder.getNodeMapping().keySet()) {
 			try {
 				RedisNode redisNode = RedisClusterHolder.getNodeMapping().get(key);
-				redisNode.connect().close();
+				redisNode.closeConnect();
 			} catch (Exception e) {
 				logger.info(key + "连接释放失败！", e);
 			} finally {

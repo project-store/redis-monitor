@@ -18,6 +18,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bee.redisflag.data.RedisClusterHolder;
 import com.bee.redisflag.model.RedisNode;
 
+import redis.clients.jedis.Jedis;
+
 @Controller
 public class MonitorController {
 
@@ -31,15 +33,17 @@ public class MonitorController {
 	public ModelAndView clusters() {
 		Map<String, Object> data = new HashMap<>();
 		data.put("clusters", RedisClusterHolder.getRedisClusters());
-			return new ModelAndView("clusters").addAllObjects(data);
+		return new ModelAndView("clusters").addAllObjects(data);
 	}
 
 	@RequestMapping(value = "/monitor/{node:.*}", produces = { "text/html" })
 	public Object monitor(@PathVariable("node") String node) {
 		Map<String, Object> data = new HashMap<>();
 		RedisNode redisNode = RedisClusterHolder.getNodeMapping().get(node);
+		Jedis jedis = redisNode.connect();
 		data.put("node", node);
-		data.put("info", redisNode.connect().info());
+		data.put("info", jedis.info());
+		jedis.close();
 		return new ModelAndView("monitor").addAllObjects(data);
 	}
 
@@ -47,9 +51,11 @@ public class MonitorController {
 	@RequestMapping("/monitor/{node:.*}")
 	public Object monitorData(@PathVariable("node") String node) throws IOException {
 		RedisNode redisNode = RedisClusterHolder.getNodeMapping().get(node);
-		String redis_info = redisNode.connect().info();
+		Jedis jedis = redisNode.connect();
+		String redis_info = jedis.info();
 		Properties redis_info_properties = PropertiesLoaderUtils.loadProperties(new InputStreamResource(new ByteArrayInputStream(redis_info.getBytes())));
-		redis_info_properties.put("dbSize", redisNode.connect().dbSize());
+		redis_info_properties.put("dbSize", jedis.dbSize());
+		jedis.close();
 		return redis_info_properties;
 	}
 
@@ -57,13 +63,15 @@ public class MonitorController {
 	public Object config(@PathVariable("node") String node) {
 		Map<String, Object> data = new HashMap<>();
 		RedisNode redisNode = RedisClusterHolder.getNodeMapping().get(node);
+		Jedis jedis = redisNode.connect();
 		data.put("node", node);
-		List<String> configStrList = redisNode.connect().configGet("*");
+		List<String> configStrList = jedis.configGet("*");
 		Map<String, Object> configs = new HashMap<>();
 		for (int i = 0; i < configStrList.size(); i += 2) {
 			configs.put(configStrList.get(i), configStrList.get(i + 1));
 		}
 		data.put("configs", configs);
+		jedis.close();
 		return new ModelAndView("config").addAllObjects(data);
 	}
 
@@ -71,8 +79,10 @@ public class MonitorController {
 	public Object slowlog(@PathVariable("node") String node) {
 		Map<String, Object> data = new HashMap<>();
 		RedisNode redisNode = RedisClusterHolder.getNodeMapping().get(node);
+		Jedis jedis = redisNode.connect();
 		data.put("node", node);
-		data.put("slowLogs", redisNode.connect().slowlogGet());
+		data.put("slowLogs", jedis.slowlogGet());
+		jedis.close();
 		return new ModelAndView("slowlog").addAllObjects(data);
 	}
 

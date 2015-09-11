@@ -16,6 +16,8 @@ import com.bee.redisflag.data.RedisClusterHolder;
 import com.bee.redisflag.model.RedisCluster;
 import com.bee.redisflag.model.RedisNode;
 
+import redis.clients.jedis.Jedis;
+
 /**
  * @author weiwei 系统初始化程序
  */
@@ -66,8 +68,9 @@ public class SystemInitializer {
 		Collection<RedisNode> values = RedisClusterHolder.getNodeMapping().values();
 		for (RedisNode redisNode : values) {
 			try {
-				redisNode.connect();
-				logger.info(redisNode + "连接已创建");
+				Jedis connect = redisNode.connect();
+				logger.info("ping " + redisNode + ":" + connect.ping());
+				connect.close();
 			} catch (Exception e) {
 				logger.warn(redisNode + "连接创建失败!", e);
 			}
