@@ -1,2 +1,2 @@
 #RedisFlag
-(http://www.baidu.com/as.png)
+![Alt text](/path/to/img.jpg)
