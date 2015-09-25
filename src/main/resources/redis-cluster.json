@@ -20,6 +20,22 @@
 		name:"b28session1.redis.com",
 		nodes:[
 			{name:"b28session1.redis.com",host:"192.168.10.142",port:"6379"}
+		],
+		children:[
+			{
+				name:"cluster1",
+				nodes:[
+					{name:"",host:"192.168.5.230",port:"6379"},
+					{name:"",host:"192.168.5.139",port:"6379"}
+				]
+			},
+			{
+				name:"cluster1",
+				nodes:[
+					{name:"",host:"192.168.5.230",port:"6379"},
+					{name:"",host:"192.168.5.139",port:"6379"}
+				]
+			}
 		]
 	},
 	{
@@ -27,6 +43,38 @@
 		nodes:[
 			{name:"b28cache1.redis.com",host:"192.168.10.142",port:"6389"},
 			{name:"b28cache1.redis.com",host:"192.168.10.143",port:"6379"}
+		],
+		children:[
+			{
+				name:"cluster1",
+				nodes:[
+					{name:"",host:"192.168.5.230",port:"6379"},
+					{name:"",host:"192.168.5.139",port:"6379"}
+				],
+				children:[
+					{
+						name:"cluster1",
+						nodes:[
+							{name:"",host:"192.168.5.230",port:"6379"},
+							{name:"",host:"192.168.5.139",port:"6379"}
+						]
+					},
+					{
+						name:"cluster1",
+						nodes:[
+							{name:"",host:"192.168.5.230",port:"6379"},
+							{name:"",host:"192.168.5.139",port:"6379"}
+						]
+					}
+				]
+			},
+			{
+				name:"cluster1",
+				nodes:[
+					{name:"",host:"192.168.5.230",port:"6379"},
+					{name:"",host:"192.168.5.139",port:"6379"}
+				]
+			}
 		]
 	},
 	{
