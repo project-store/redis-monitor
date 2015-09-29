@@ -6,6 +6,10 @@
 + 支持查看慢日志
 + 更多功能未完待续 ~ 
 
+###使用说明
++ JDK1.7+ 、Web3.0
++ redis节点配置文件：redis-cluster.json
+
 ####集群表
 ![Alt 集群表](doc/集群表.png)
 
