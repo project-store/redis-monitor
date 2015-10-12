@@ -7,7 +7,7 @@
 + 更多功能未完待续 ~ 
 
 ###使用说明
-+ JDK1.7+ 、Web3.0
++ 环境要求：JRE1.7+ 、Servlet3.0（因应用配置用到了ServletContainerInitializer，这种方式是Servlet3.0以上的版本才有的，所以应用容器必须支持Servlet3.0才能正常运行，比如tomcat7.0 +等等。。。）
 + redis节点配置文件：redis-cluster.json
 
 ####集群表
