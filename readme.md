@@ -23,4 +23,4 @@
 ![Alt 查看慢日志](doc/SlowLog.png)
 
 ####以下是广告，求扩散O(∩_∩)O
-轻松好玩的聊天室： http://www.italk.pub/
+轻松好玩的聊天室： [http://www.italk.pub/](http://www.italk.pub/)
