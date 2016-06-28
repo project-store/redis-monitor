@@ -6,9 +6,15 @@
 		]
 	},
     {
-        "name":"redis.local2",
+        "name":"redis.neibu",
         "nodes":[
-            {"name":"","host":"127.0.0.1","port":"6379"}
+            {"name":"","host":"10.155.20.60","port":"6379"}
+        ]
+    },
+    {
+        "name":"redis.trunk",
+        "nodes":[
+            {"name":"","host":"10.155.20.62","port":"6379"}
         ]
     }
 ]
