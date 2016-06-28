@@ -2,7 +2,8 @@
 	{
 		"name":"redis.local",
 		"nodes":[
-			{"name":"","host":"127.0.0.1","port":"6379"}
+			{"name":"master","host":"127.0.0.1","port":"6379"},
+            {"name":"slave","host":"127.0.0.1","port":"6380"}
 		]
 	},
     {
